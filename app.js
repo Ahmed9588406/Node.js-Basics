@@ -12,8 +12,36 @@ const EventEmitter = require('events')
 
 const eventemitter = new EventEmitter()
 
-eventemitter.on('tutorial',()=>{
-    console.log("tutorial event has occured")
+eventemitter.on('tutorial',(num1 , num2)=>{
+    console.log(num1 + num2)
 });
 
-eventemitter.emit('tutorial')
+eventemitter.emit('tutorial',1,2)
+
+
+class Person extends EventEmitter {
+    constructor(name){
+        super()
+        this._name = name
+    }
+
+    get name(){
+        return this._name
+    }
+}
+
+let ahmed = new Person("ahmed");
+let mo = new Person("mo");
+
+ahmed.on("name",()=>{
+    console.log("my name is " + ahmed.name)
+})
+
+mo.on("name",()=>{
+    console.log("my name is " + mo.name)
+})
+
+// they emitted synchronously
+
+ahmed.emit("name")
+mo.emit("name")
